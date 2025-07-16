@@ -2,11 +2,18 @@ require('dotenv').config({ path: '../../.env' });
 const admin = require('firebase-admin');
 
 try {
+    const serviceAccountPath = process.env.GOOGLE_APPLICATION_CREDENTIALS;
+    if (!serviceAccountPath) {
+        throw new Error("A variável de ambiente GOOGLE_APPLICATION_CREDENTIALS não está definida.");
+    }
+    const serviceAccount = require(serviceAccountPath);
+
     // A variável de ambiente GOOGLE_APPLICATION_CREDENTIALS aponta para o ficheiro de credenciais
     admin.initializeApp({
-        credential: admin.credential.applicationDefault(),
+        credential: admin.credential.cert(serviceAccount),
+        projectId: serviceAccount.project_id, // Especificar explicitamente o ID do projeto
     });
-    console.log("Firebase Admin SDK inicializado com sucesso.");
+    console.log(`Firebase Admin SDK inicializado com sucesso para o projeto: ${serviceAccount.project_id}`);
 } catch (error) {
     console.error("Erro ao inicializar o Firebase Admin SDK:", error);
     console.log("Certifique-se de que a variável de ambiente GOOGLE_APPLICATION_CREDENTIALS está a apontar para um ficheiro serviceAccountKey.json válido.");

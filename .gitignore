@@ -1,6 +1,6 @@
 # Dependencies
 /node_modules
-/ArrakisAlertBot/node_modules
+/ArrakisAlertBot/node_modulesgi pus
 /ArrakisAlertAPI/node_modules
 /ArrakisAlertApp/node_modules
 
@@ -22,7 +22,6 @@ yarn-error.log*
 # Firebase credentials
 firebase-service-account.json
 GoogleService-Info.plist
-google-services.json
 
 # Expo
 .expo/

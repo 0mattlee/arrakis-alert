@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "812727631141",
+    "project_id": "arrakis-alert-firebase",
+    "storage_bucket": "arrakis-alert-firebase.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:812727631141:android:c9fa763809555a45ccaecc",
+        "android_client_info": {
+          "package_name": "com.yourcompany.arrakisalertapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCd_cpQoaH7VRCkxyekP3fuiAaxUU1rM6g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

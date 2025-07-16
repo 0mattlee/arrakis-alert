@@ -9,6 +9,8 @@ require('./src/services/fcm-service');
 // O Render parece estar a ter problemas a injetar as variáveis antes do arranque inicial.
 // A aplicação irá agora falhar mais tarde se as variáveis estiverem de facto em falta.
 
+// Forçando uma nova alteração para o deploy do Render.
+
 const app = express();
 const port = process.env.PORT || 3000;
 

@@ -4,12 +4,9 @@
     "slug": "arrakis-alert-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#FFFFFF"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -20,10 +17,6 @@
       "googleServicesFile": "./GoogleService-Info.plist"
     },
     "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      },
       "package": "com.yourcompany.arrakisalertapp",
       "googleServicesFile": "./google-services.json",
       "permissions": [
@@ -31,23 +24,21 @@
         "android.permission.WAKE_LOCK"
       ]
     },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    },
+    "web": {},
     "plugins": [
       [
         "expo-notifications",
         {
-          "icon": "./assets/notification-icon.png",
           "color": "#ffffff"
         }
       ]
     ],
     "extra": {
       "eas": {
-        "projectId": "SEU_EXPO_PROJECT_ID"
+        "projectId": "dfcc76b7-e388-4642-b959-8f84a4be7246"
       },
       "backendApiUrl": "https://arrakis-alert.onrender.com/api"
-    }
+    },
+    "owner": "0mattlee"
   }
 }

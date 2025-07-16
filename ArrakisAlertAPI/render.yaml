@@ -1,0 +1,32 @@
+# Blueprint do Render para a Arrakis Alert API
+# Visite https://render.com/docs/blueprint-spec para mais detalhes
+
+services:
+  - type: web
+    name: arrakis-alert-api
+    env: node
+    # O Render irá executar estes comandos na ordem em que aparecem
+    buildCommand: npm install
+    # Inicializa a base de dados e depois inicia o servidor
+    startCommand: "npm run db:init && npm start"
+    healthCheckPath: /
+    # Configuração do disco persistente para a base de dados SQLite
+    disks:
+      - name: sqlite-db
+        mountPath: /data
+        sizeGB: 1 # O tamanho mínimo e mais que suficiente
+    # Variáveis de ambiente.
+    # Os valores secretos (API_KEY, GOOGLE_APPLICATION_CREDENTIALS_CONTENT)
+    # devem ser definidos como "Secret Files" ou variáveis no painel do Render.
+    envVars:
+      - key: DB_PATH
+        value: /data/arrakis-alert.db # Aponta para o disco persistente
+      - key: GOOGLE_APPLICATION_CREDENTIALS
+        value: /etc/secrets/firebase-service-account.json # Caminho para o secret file
+      - key: API_KEY
+        fromService:
+          type: web
+          name: arrakis-alert-api
+          envVarKey: API_KEY_SECRET # Nome da variável secreta que irá criar no painel
+      - key: NODE_ENV
+        value: production

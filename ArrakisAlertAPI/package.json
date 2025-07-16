@@ -1,0 +1,27 @@
+{
+  "name": "arrakisalertapi",
+  "version": "1.0.0",
+  "description": "Backend server for the Arrakis Alert system.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "db:init": "node src/database/init-db.js"
+  },
+  "keywords": [
+    "api",
+    "express",
+    "push-notification"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "sqlite3": "^5.1.7",
+    "firebase-admin": "^12.1.1",
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.2"
+  }
+}

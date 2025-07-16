@@ -1,0 +1,2 @@
+Este é um placeholder. Por favor, substitua este ficheiro por um ficheiro de áudio real chamado 'alarm.mp3'.
+O som do alarme será procurado neste diretório.

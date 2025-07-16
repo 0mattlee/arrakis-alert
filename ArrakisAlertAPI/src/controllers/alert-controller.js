@@ -92,8 +92,8 @@ exports.triggerAlert = async (req, res) => {
             });
 
         } catch (error) {
-            console.error("Erro ao enviar notificações:", error);
-            res.status(500).json({ message: 'Erro interno do servidor ao enviar notificações.' });
+            console.error("Erro detalhado ao enviar notificações:", error);
+            res.status(500).json({ message: 'Erro interno do servidor ao enviar notificações.', error: error.message });
         }
     });
 };

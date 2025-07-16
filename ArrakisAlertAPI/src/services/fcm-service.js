@@ -1,22 +1,33 @@
-require('dotenv').config({ path: '../../.env' });
 const admin = require('firebase-admin');
+const fs = require('fs');
 
-try {
-    const serviceAccountPath = process.env.GOOGLE_APPLICATION_CREDENTIALS;
-    if (!serviceAccountPath) {
-        throw new Error("A variável de ambiente GOOGLE_APPLICATION_CREDENTIALS não está definida.");
+function initializeFirebase() {
+    try {
+        const serviceAccountPath = process.env.GOOGLE_APPLICATION_CREDENTIALS;
+        if (!serviceAccountPath) {
+            throw new Error("A variável de ambiente GOOGLE_APPLICATION_CREDENTIALS não está definida.");
+        }
+
+        console.log(`[FCM Service] A tentar ler o ficheiro de credenciais em: ${serviceAccountPath}`);
+        
+        // Ler o ficheiro explicitamente para garantir que ele existe e é acessível
+        const serviceAccountRaw = fs.readFileSync(serviceAccountPath);
+        const serviceAccount = JSON.parse(serviceAccountRaw);
+
+        if (admin.apps.length === 0) { // Evita reinicializar a app
+            admin.initializeApp({
+                credential: admin.credential.cert(serviceAccount),
+                projectId: serviceAccount.project_id,
+            });
+            console.log(`[FCM Service] Firebase Admin SDK inicializado com sucesso para o projeto: ${serviceAccount.project_id}`);
+        } else {
+            console.log("[FCM Service] Firebase Admin SDK já estava inicializado.");
+        }
+    } catch (error) {
+        console.error("[FCM Service] ERRO CRÍTICO AO INICIALIZAR O FIREBASE:", error);
+        // Lançar o erro para que o processo principal possa falhar
+        throw error;
     }
-    const serviceAccount = require(serviceAccountPath);
-
-    // A variável de ambiente GOOGLE_APPLICATION_CREDENTIALS aponta para o ficheiro de credenciais
-    admin.initializeApp({
-        credential: admin.credential.cert(serviceAccount),
-        projectId: serviceAccount.project_id, // Especificar explicitamente o ID do projeto
-    });
-    console.log(`Firebase Admin SDK inicializado com sucesso para o projeto: ${serviceAccount.project_id}`);
-} catch (error) {
-    console.error("Erro ao inicializar o Firebase Admin SDK:", error);
-    console.log("Certifique-se de que a variável de ambiente GOOGLE_APPLICATION_CREDENTIALS está a apontar para um ficheiro serviceAccountKey.json válido.");
 }
 
 
@@ -73,6 +84,6 @@ async function sendPushNotification(tokens, title, body, data) {
 }
 
 module.exports = {
+    initializeFirebase,
     sendPushNotification,
-    admin
 };

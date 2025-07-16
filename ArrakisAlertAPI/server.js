@@ -1,11 +1,19 @@
-require('dotenv').config();
+// Carrega variáveis de ambiente do ficheiro .env apenas em ambientes que não são de produção
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config();
+}
+
 const express = require('express');
 const apiRoutes = require('./src/api/routes');
+const { initializeFirebase } = require('./src/services/fcm-service');
 
-// Inicializar o serviço FCM para que o Firebase seja configurado no arranque
-require('./src/services/fcm-service'); 
-
-// A verificação das variáveis de ambiente foi removida para garantir que o deploy no Render funcione.
+// Inicializa o Firebase e para o processo se falhar
+try {
+    initializeFirebase();
+} catch (error) {
+    console.error("Não foi possível iniciar o servidor devido a um erro na inicialização do Firebase.");
+    process.exit(1);
+}
 
 const app = express();
 const port = process.env.PORT || 3000;

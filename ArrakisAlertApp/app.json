@@ -47,7 +47,7 @@
       "eas": {
         "projectId": "SEU_EXPO_PROJECT_ID"
       },
-      "backendApiUrl": "https://SUA_URL_DO_RENDER.onrender.com/api"
+      "backendApiUrl": "https://arrakis-alert.onrender.com/api"
     }
   }
 }

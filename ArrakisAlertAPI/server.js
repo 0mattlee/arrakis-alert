@@ -5,11 +5,12 @@ const apiRoutes = require('./src/api/routes');
 // Inicializar o serviço FCM para que o Firebase seja configurado no arranque
 require('./src/services/fcm-service'); 
 
-// A verificação das variáveis de ambiente foi temporariamente removida para depuração no Render.
-// O Render parece estar a ter problemas a injetar as variáveis antes do arranque inicial.
-// A aplicação irá agora falhar mais tarde se as variáveis estiverem de facto em falta.
-
-// Forçando uma nova alteração para o deploy do Render.
+// Verificação das variáveis de ambiente essenciais
+if (!process.env.API_KEY || !process.env.GOOGLE_APPLICATION_CREDENTIALS) {
+    console.error("ERRO: As variáveis de ambiente API_KEY e GOOGLE_APPLICATION_CREDENTIALS são obrigatórias.");
+    console.log("Por favor, verifique o seu ficheiro .env e a existência do ficheiro de credenciais do Firebase.");
+    process.exit(1);
+}
 
 const app = express();
 const port = process.env.PORT || 3000;

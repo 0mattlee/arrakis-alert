@@ -1,4 +1,8 @@
-require('dotenv').config();
+// Carrega variáveis de ambiente do ficheiro .env apenas em ambientes que não são de produção
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config();
+}
+
 const express = require('express');
 const apiRoutes = require('./src/api/routes');
 

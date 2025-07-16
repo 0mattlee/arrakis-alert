@@ -23,10 +23,7 @@ services:
         value: /data/arrakis-alert.db # Aponta para o disco persistente
       - key: GOOGLE_APPLICATION_CREDENTIALS
         value: /etc/secrets/firebase-service-account.json # Caminho para o secret file
-      - key: API_KEY
-        fromService:
-          type: web
-          name: arrakis-alert-api
-          envVarKey: API_KEY_SECRET # Nome da variável secreta que irá criar no painel
       - key: NODE_ENV
         value: production
+      # A variável API_KEY deve ser definida diretamente no painel do Render
+      # na secção "Environment Variables".
